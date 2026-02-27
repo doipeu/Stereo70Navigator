@@ -1,0 +1,16 @@
+# Exemplu fișier pentru import coordonate Stereo 70
+# Liniile care încep cu # sunt comentarii și sunt ignorate
+# Format acceptat: nume,x,y sau doar x,y
+
+# Exemple cu nume
+Birou Principal,500000,450000
+Depozit Nord,520000,460000
+Teren Măsurare 1,485000,445000
+
+# Exemple fără nume (va genera automat "Import 1", "Import 2" etc.)
+510000,455000
+515000,458000
+
+# Se acceptă și alte separatoare: ; sau spațiu
+Punct Sud;490000;440000
+Punct Est 530000 470000

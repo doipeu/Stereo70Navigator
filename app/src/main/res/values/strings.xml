@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Stereo70 Navigator</string>
+    <string name="enter_coordinates">Introduceți Coordonatele</string>
+    <string name="stereo_x">Coordonata X (Stereo 70)</string>
+    <string name="stereo_y">Coordonata Y (Stereo 70)</string>
+    <string name="location_name">Nume Locație (opțional)</string>
+    <string name="navigate">Navighează</string>
+    <string name="convert">Convertește</string>
+    <string name="import_file">Importă din Fișier</string>
+    <string name="view_favorites">Vezi Favorite</string>
+    <string name="add_to_favorites">Adaugă la Favorite</string>
+    <string name="gps_result">Rezultat GPS:</string>
+    <string name="latitude">Latitudine:</string>
+    <string name="longitude">Longitudine:</string>
+    <string name="invalid_coordinates">Coordonate invalide! Verificați valorile introduse.</string>
+    <string name="favorites">Favorite</string>
+    <string name="no_favorites">Nu aveți favorite salvate.</string>
+    <string name="delete">Șterge</string>
+    <string name="edit">Editează</string>
+    <string name="example_hint">Exemplu: X=500000, Y=500000</string>
+</resources>

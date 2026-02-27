@@ -1,0 +1,62 @@
+# Coordonate Stereo 70 - Orașe și Locații din România
+# Format: Nume,X,Y
+# Poate fi importat direct în aplicație pentru testare
+
+# Orașe Mari
+București - Piața Universității,500119,357429
+Cluj-Napoca - Piața Unirii,465816,542649
+Timișoara - Piața Victoriei,399344,447279
+Iași - Piața Unirii,594284,538654
+Constanța - Cazino,578861,325304
+Brașov - Piața Sfatului,512345,438765
+Craiova - Centru,421234,362145
+Galați - Centru,591234,462345
+Ploiești - Centru,498765,421234
+Oradea - Centru,381234,493456
+
+# Puncte Turistice
+Castelul Bran,508234,425678
+Palatul Parlamentului,499234,356789
+Palatul Peleș,504567,416789
+Transfăgărășan - Lac Bâlea,486234,398765
+Cetatea Sighișoara,498123,487654
+Cetatea Râșnov,510234,429876
+Voronet - Mănăstire,634567,554321
+Hunyad - Castel,436789,446789
+Sucevița - Mănăstire,625678,561234
+Salina Turda,459876,532345
+
+# Aeroporturi
+Aeroportul Henri Coandă București,505678,359876
+Aeroportul Cluj,467890,543210
+Aeroportul Timișoara,401234,449876
+Aeroportul Iași,596789,540123
+Aeroportul Sibiu,487654,492345
+
+# Parcuri Naționale
+Cheile Bicazului,565432,516789
+Retezat - Lac Bucura,450123,382456
+Parcul Piatra Craiului,512345,410987
+Munții Făgăraș,495678,402345
+Parcul Apuseni,445678,502345
+
+# Litoralul Mării Negre
+Mamaia Nord,579234,319876
+Vama Veche,582345,285678
+Eforie Nord,578901,313456
+Costinești,580123,309876
+Mangalia,582456,292345
+
+# Zone Montane
+Poiana Brașov,513456,426789
+Sinaia,503789,417654
+Predeal,507890,423456
+Azuga,505123,419876
+Bușteni,504876,418765
+
+# Universități
+UPB București,498765,358234
+UBB Cluj,465234,542987
+UVT Timișoara,399876,447654
+UAIC Iași,594567,538901
+Universitatea Transilvania Brașov,512678,438234
