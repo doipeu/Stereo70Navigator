@@ -69,6 +69,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void convertCoordinates() {
+        // Reset state
+        currentLat = 0;
+        currentLon = 0;
+        cardResult.setVisibility(View.GONE);
+
         String xStr = editStereoX.getText().toString().trim();
         String yStr = editStereoY.getText().toString().trim();
 
@@ -78,15 +83,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         try {
-            double x = Double.parseDouble(xStr);
-            double y = Double.parseDouble(yStr);
+            double x = Double.parseDouble(xStr); // X = Nord
+            double y = Double.parseDouble(yStr); // Y = Est
 
             if (!Stereo70Converter.isValidStereo70(x, y)) {
                 Toast.makeText(this, getString(R.string.invalid_coordinates), Toast.LENGTH_LONG).show();
                 return;
             }
 
-            Stereo70Converter.GPSCoordinate gps = Stereo70Converter.stereo70ToGPS(x, y);
+            // Converterul universal așteaptă formula matematică (Est, Nord) -> deci (y, x)
+            Stereo70Converter.GPSCoordinate gps = Stereo70Converter.stereo70ToGPS(y, x);
             currentLat = gps.latitude;
             currentLon = gps.longitude;
 
@@ -104,11 +110,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void navigateToLocation() {
+        // Force conversion to use the latest inputs on screen
+        convertCoordinates();
         if (currentLat == 0 && currentLon == 0) {
-            convertCoordinates();
-            if (currentLat == 0 && currentLon == 0) {
-                return;
-            }
+            return;
         }
 
         // Open Google Maps with navigation intent

@@ -72,9 +72,9 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
                     coordinate.getStereoX(), coordinate.getStereoY()));
 
             btnNavigateToFavorite.setOnClickListener(v -> {
-                // Convert and navigate
+                // Convert and navigate (am inversat coordonatele: așteaptă Est, apoi Nord)
                 Stereo70Converter.GPSCoordinate gps = Stereo70Converter.stereo70ToGPS(
-                        coordinate.getStereoX(), coordinate.getStereoY());
+                        coordinate.getStereoY(), coordinate.getStereoX());
 
                 Uri gmmIntentUri = Uri.parse("google.navigation:q=" + gps.latitude + "," + gps.longitude);
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
