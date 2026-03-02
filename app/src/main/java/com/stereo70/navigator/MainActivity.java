@@ -116,8 +116,9 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        // Open Google Maps with navigation intent
-        Uri gmmIntentUri = Uri.parse("google.navigation:q=" + currentLat + "," + currentLon);
+        // Open Google Maps with a pin at exact location instead of auto-routing to nearest road
+        String label = Uri.encode("Locație Stereo70");
+        Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + currentLat + "," + currentLon + "(" + label + ")");
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
 
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(mapIntent);
         } else {
             // Fallback to browser if Google Maps not installed
-            Uri browserUri = Uri.parse("https://www.google.com/maps/dir/?api=1&destination=" +
+            Uri browserUri = Uri.parse("https://www.google.com/maps/search/?api=1&query=" +
                     currentLat + "," + currentLon);
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, browserUri);
             startActivity(browserIntent);

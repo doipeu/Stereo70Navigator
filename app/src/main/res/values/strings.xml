@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">Stereo70 Navigator</string>
     <string name="enter_coordinates">Introduceți Coordonatele</string>
-    <string name="stereo_x">Coordonata X (Stereo 70)</string>
-    <string name="stereo_y">Coordonata Y (Stereo 70)</string>
+    <string name="stereo_x">Coordonata X (Nord) Stereo 70</string>
+    <string name="stereo_y">Coordonata Y (Est) Stereo 70</string>
     <string name="location_name">Nume Locație (opțional)</string>
     <string name="navigate">Navighează</string>
     <string name="convert">Convertește</string>
@@ -18,5 +18,5 @@
     <string name="no_favorites">Nu aveți favorite salvate.</string>
     <string name="delete">Șterge</string>
     <string name="edit">Editează</string>
-    <string name="example_hint">Exemplu: X=500000, Y=500000</string>
+    <string name="example_hint">Exemplu: X(Nord)=439660.43, Y(Est)=726851.53</string>
 </resources>

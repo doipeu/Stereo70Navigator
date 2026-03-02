@@ -82,10 +82,16 @@ public class Stereo70Converter {
         }
 
         // Step 3: Convert from Krasovsky to WGS84 (datum transformation)
-        // Using simplified Helmert transformation parameters for Romania
-        double dx = 28.0;  // meters
-        double dy = -121.0; // meters
-        double dz = -77.0;  // meters
+        // Using 7-parameter Helmert transformation parameters for Romania (EPSG:3844 to EPSG:4326)
+        double dx = 2.3287;
+        double dy = -147.0425;
+        double dz = -92.0802;
+        
+        double secToRad = Math.PI / (180.0 * 3600.0);
+        double rx = 0.3092483 * secToRad;
+        double ry = -0.32482185 * secToRad;
+        double rz = -0.49729934 * secToRad;
+        double s = 5.68906266 / 1000000.0;
 
         // Convert to Cartesian coordinates (Krasovsky)
         double N = KRASOVSKY_A / Math.sqrt(1 - KRASOVSKY_E2 * Math.sin(latKras) * Math.sin(latKras));
@@ -93,10 +99,10 @@ public class Stereo70Converter {
         double yCart = N * Math.cos(latKras) * Math.sin(lonKras);
         double zCart = N * (1 - KRASOVSKY_E2) * Math.sin(latKras);
 
-        // Apply transformation
-        double xWgs = xCart + dx;
-        double yWgs = yCart + dy;
-        double zWgs = zCart + dz;
+        // Apply 7-parameter Position Vector transformation
+        double xWgs = xCart + dx + s * xCart - rz * yCart + ry * zCart;
+        double yWgs = yCart + dy + rz * xCart + s * yCart - rx * zCart;
+        double zWgs = zCart + dz - ry * xCart + rx * yCart + s * zCart;
 
         // Convert back to geodetic coordinates (WGS84)
         double lon = Math.atan2(yWgs, xWgs);
@@ -106,8 +112,8 @@ public class Stereo70Converter {
         // Iterative refinement for latitude
         for (int i = 0; i < 5; i++) {
             double sinLat = Math.sin(lat);
-            N = WGS84_A / Math.sqrt(1 - WGS84_E2 * sinLat * sinLat);
-            lat = Math.atan2(zWgs + WGS84_E2 * N * sinLat, p);
+            double N_WGS = WGS84_A / Math.sqrt(1 - WGS84_E2 * sinLat * sinLat);
+            lat = Math.atan2(zWgs + WGS84_E2 * N_WGS * sinLat, p);
         }
 
         // Convert to degrees

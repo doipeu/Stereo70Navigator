@@ -76,7 +76,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
                 Stereo70Converter.GPSCoordinate gps = Stereo70Converter.stereo70ToGPS(
                         coordinate.getStereoY(), coordinate.getStereoX());
 
-                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + gps.latitude + "," + gps.longitude);
+                String label = Uri.encode(coordinate.getName());
+                Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + gps.latitude + "," + gps.longitude + "(" + label + ")");
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
 
@@ -84,7 +85,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
                     context.startActivity(mapIntent);
                 } else {
                     // Fallback to browser
-                    Uri browserUri = Uri.parse("https://www.google.com/maps/dir/?api=1&destination=" +
+                    Uri browserUri = Uri.parse("https://www.google.com/maps/search/?api=1&query=" +
                             gps.latitude + "," + gps.longitude);
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, browserUri);
                     context.startActivity(browserIntent);
