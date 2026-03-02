@@ -82,7 +82,8 @@ public class Stereo70Converter {
         }
 
         // Step 3: Convert from Krasovsky to WGS84 (datum transformation)
-        // Using 7-parameter Helmert transformation parameters for Romania (EPSG:3844 to EPSG:4326)
+        // Using 7-parameter Helmert Coordinate Frame Rotation (EPSG:3844 to EPSG:4326/Bursa-Wolf)
+        // Values from official ANCPI definitions minus the grid distortion
         double dx = 2.3287;
         double dy = -147.0425;
         double dz = -92.0802;
@@ -99,9 +100,9 @@ public class Stereo70Converter {
         double yCart = N * Math.cos(latKras) * Math.sin(lonKras);
         double zCart = N * (1 - KRASOVSKY_E2) * Math.sin(latKras);
 
-        // Apply 7-parameter Position Vector transformation
-        double xWgs = xCart + dx + s * xCart - rz * yCart + ry * zCart;
-        double yWgs = yCart + dy + rz * xCart + s * yCart - rx * zCart;
+        // Apply 7-parameter Coordinate Frame Rotation (Bursa-Wolf)
+        double xWgs = xCart + dx - rz * yCart + ry * zCart + s * xCart;
+        double yWgs = yCart + dy + rz * xCart - rx * zCart + s * yCart;
         double zWgs = zCart + dz - ry * xCart + rx * yCart + s * zCart;
 
         // Convert back to geodetic coordinates (WGS84)
