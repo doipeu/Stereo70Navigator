@@ -42,6 +42,7 @@ public class Stereo70Converter {
     private static org.locationtech.proj4j.CoordinateReferenceSystem sourceCRS;
     private static org.locationtech.proj4j.CoordinateReferenceSystem targetCRS;
     private static org.locationtech.proj4j.CoordinateTransform transform;
+    private static NTv2Grid ntv2Grid;
 
     /**
      * Initialize grid and proj4j
@@ -49,23 +50,12 @@ public class Stereo70Converter {
     public static void init(android.content.Context context) {
         if (isInitialized) return;
         try {
-            java.io.File gridFile = new java.io.File(context.getFilesDir(), "stereo70_etrs89A.gsb");
-            if (!gridFile.exists()) {
-                java.io.InputStream is = context.getAssets().open("stereo70_etrs89A.gsb");
-                java.io.FileOutputStream os = new java.io.FileOutputStream(gridFile);
-                byte[] buffer = new byte[1024];
-                int read;
-                while ((read = is.read(buffer)) != -1) {
-                    os.write(buffer, 0, read);
-                }
-                is.close();
-                os.flush();
-                os.close();
-            }
+            ntv2Grid = new NTv2Grid();
+            ntv2Grid.load(context, "stereo70_etrs89A.gsb");
 
             org.locationtech.proj4j.CRSFactory factory = new org.locationtech.proj4j.CRSFactory();
-            String customProj = "+proj=sterea +lat_0=46 +lon_0=25 +k=0.99975 +x_0=500000 +y_0=500000 +ellps=krass +nadgrids=" 
-                    + gridFile.getAbsolutePath() + " +units=m +no_defs";
+            // Fara parametrul +nadgrids care dadea eroare in org.locationtech.proj4j
+            String customProj = "+proj=sterea +lat_0=46 +lon_0=25 +k=0.99975 +x_0=500000 +y_0=500000 +ellps=krass +units=m +no_defs";
             sourceCRS = factory.createFromParameters("EPSG:3844_Grid", customProj);
             targetCRS = factory.createFromName("EPSG:4326");
             
@@ -91,14 +81,20 @@ public class Stereo70Converter {
                 org.locationtech.proj4j.ProjCoordinate src = new org.locationtech.proj4j.ProjCoordinate(x, y);
                 org.locationtech.proj4j.ProjCoordinate tgt = new org.locationtech.proj4j.ProjCoordinate();
                 transform.transform(src, tgt);
-                // Proj4J EPSG:4326 output is usually X=longitude, Y=latitude
-                return new GPSCoordinate(tgt.y, tgt.x);
+                // Proj4J EPSG:4326 output: X=longitude, Y=latitude
+                
+                // Add the true precise TransDatRO NTv2 shift parsed natively
+                double[] shift = ntv2Grid.getShift(tgt.y, tgt.x);
+                double finalLat = tgt.y + shift[0];
+                double finalLon = tgt.x + shift[1];
+
+                return new GPSCoordinate(finalLat, finalLon);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         
-        // Fallback: 7-parameter Coordinate Frame Rotation (Bursa-Wolf) without Grid
+        // Fallback: Extremely simple Spherical Stereographic + Helmert (Has large bounds of error 300m)
         double xRel = x - STEREO70_X0;
         double yRel = y - STEREO70_Y0;
 

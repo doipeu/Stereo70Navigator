@@ -1,0 +1,9 @@
+plugins {
+    id 'java'
+}
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation 'org.locationtech.proj4j:proj4j:1.2.2'
+}
