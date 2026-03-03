@@ -41,7 +41,8 @@ public class NTv2Grid {
             ByteBuffer buffer = ByteBuffer.wrap(fileData);
             buffer.order(ByteOrder.LITTLE_ENDIAN);
 
-            // Read header boundaries
+            // Read header boundaries (Subgrid starts at byte 176)
+            // Record 4 (index 4) is S_LAT, record 5 is N_LAT, 6 is E_LONG, 7 is W_LONG, 8 is LAT_INC, 9 is LONG_INC, 10 is GS_COUNT
             slat = buffer.getDouble(176 + 4 * 16 + 8) / 3600.0;
             nlat = buffer.getDouble(176 + 5 * 16 + 8) / 3600.0;
             elon = -buffer.getDouble(176 + 6 * 16 + 8) / 3600.0; // Positive East longitude
@@ -51,7 +52,8 @@ public class NTv2Grid {
 
             int gsCount = buffer.getInt(176 + 10 * 16 + 8);
 
-            cols = (int) Math.round((buffer.getDouble(176 + 7 * 16 + 8) - buffer.getDouble(176 + 6 * 16 + 8)) / buffer.getDouble(176 + 9 * 16 + 8)) + 1;
+            double lonDiff = buffer.getDouble(176 + 7 * 16 + 8) - buffer.getDouble(176 + 6 * 16 + 8);
+            cols = (int) Math.round(lonDiff / buffer.getDouble(176 + 9 * 16 + 8)) + 1;
             rows = gsCount / cols;
 
             latShifts = new float[gsCount];
@@ -77,7 +79,6 @@ public class NTv2Grid {
         int rowNum = (int) Math.floor(row);
         double rowFract = row - rowNum;
 
-        // Note: 'elon' is positive east, 'wlon' is positive east (wlon < elon theoretically, but in NTv2 E_LONG > W_LONG numerically for positive West)
         double col = (elon - lon) / loninc;
         int colNum = (int) Math.floor(col);
         double colFract = col - colNum;

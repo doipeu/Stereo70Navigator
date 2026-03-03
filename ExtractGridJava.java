@@ -2,7 +2,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-public class ExtractGrid {
+public class ExtractGridJava {
     public static void main(String[] args) throws Exception {
         byte[] fileData = Files.readAllBytes(Paths.get("app/src/main/assets/stereo70_etrs89A.gsb"));
         ByteBuffer buffer = ByteBuffer.wrap(fileData);
@@ -10,15 +10,16 @@ public class ExtractGrid {
         
         double slat = buffer.getDouble(176 + 4 * 16 + 8) / 3600.0;
         double nlat = buffer.getDouble(176 + 5 * 16 + 8) / 3600.0;
-        double elon = -buffer.getDouble(176 + 6 * 16 + 8) / 3600.0; // Pos East
+        double elon = -buffer.getDouble(176 + 6 * 16 + 8) / 3600.0; 
         double wlon = -buffer.getDouble(176 + 7 * 16 + 8) / 3600.0;
         double latinc = buffer.getDouble(176 + 8 * 16 + 8) / 3600.0;
         double loninc = buffer.getDouble(176 + 9 * 16 + 8) / 3600.0;
         int gsCount = buffer.getInt(176 + 10 * 16 + 8);
-        int cols = (int) Math.round((buffer.getDouble(176 + 7 * 16 + 8) - buffer.getDouble(176 + 6 * 16 + 8)) / buffer.getDouble(176 + 9 * 16 + 8)) + 1;
+        
+        double lonDiff = buffer.getDouble(176 + 7 * 16 + 8) - buffer.getDouble(176 + 6 * 16 + 8);
+        int cols = (int) Math.round(lonDiff / buffer.getDouble(176 + 9 * 16 + 8)) + 1;
         int rows = gsCount / cols;
         System.out.println("Cols: " + cols + " Rows: " + rows + " Total: " + gsCount);
-        System.out.println("Slat: " + slat + " Elon: " + elon);
         
         float[] latShifts = new float[gsCount];
         float[] lonShifts = new float[gsCount];
@@ -29,16 +30,13 @@ public class ExtractGrid {
             offset += 16;
         }
         
-        // 445681.963, 731125.412
-        double lat = 45.474071, lon = 27.956795; // From proj4j before grid
+        double lat = 45.474071, lon = 27.956795; 
         double row = (lat - slat) / latinc;
         int rowNum = (int) Math.floor(row);
         double rowFract = row - rowNum;
         double col = (elon - lon) / loninc;
         int colNum = (int) Math.floor(col);
         double colFract = col - colNum;
-        
-        System.out.println("Row: " + row + " Col: " + col);
         
         float lat00 = latShifts[rowNum * cols + colNum];
         float lon00 = lonShifts[rowNum * cols + colNum];
