@@ -11,6 +11,15 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <ImageView
+            android:id="@+id/imgTopoHeader"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:src="@drawable/topo_header"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/app_name" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

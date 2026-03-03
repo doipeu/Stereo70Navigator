@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+
+    <!-- metas -->
+    <meta charset="utf-8" />
+    <meta name="author" content="GEOCAD IT SOLUTIONS SRL" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description"
+          content="Firme cadastru si intabulare - Foloseste aceasta aplicatie pentru a determina pozitia unui punct de coordonate cu precizie metrica in Sistemul de Proiectie Stereografic 1970." />
+
+    <!-- title  -->
+    <title>Localizare/Pozitionare teren - Firme cadastru si intabulare</title>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="https://firmecadastru.ro/assets/img/logos/favicon.png"/>
+    <link rel="apple-touch-icon" href="https://firmecadastru.ro/assets/img/logos/apple-touch-icon-57x57.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="https://firmecadastru.ro/assets/img/logos/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="https://firmecadastru.ro/assets/img/logos/apple-touch-icon-114x114.png"/>
+
+    <!-- plugins -->
+    <link rel="stylesheet" href="https://firmecadastru.ro/assets/css/plugins.css"/>
+
+    <!-- core style css -->
+    <link href="https://firmecadastru.ro/assets/css/styles.css" rel="stylesheet"/>
+
+    
+    
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8ERY8B8XZP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8ERY8B8XZP');
+</script>
+    
+<!-- Cookie consent -->
+<link rel="stylesheet" type="text/css" href="https://firmecadastru.ro/assets/plugins/cookieconsent/cookieconsent.min.css" />
+<script src="https://firmecadastru.ro/assets/plugins/cookieconsent/cookieconsent.min.js"></script>
+<script>
+    window.addEventListener("load", function(){
+        window.cookieconsent.initialise({
+            "palette": {
+                "popup": {
+                    "background": "#efefef",
+                    "text": "#404040"
+                },
+                "button": {
+                    "background": "#8ec760",
+                    "text": "#ffffff"
+                }
+            },
+            "position": "bottom-right",
+            "content": {
+                "message": "Acest site foloseste cookies. Navigand in continuare, va exprimati acordul asupra folosirii cookie-urilor.",
+                "dismiss": "Sunt de acord",
+                "link": "Afla mai multe",
+                "href": "/politica-cookies"
+            }
+        })});
+</script>
+
+    <!-- jQuery -->
+    <script src="https://firmecadastru.ro/assets/js/jquery.min.js"></script>
+
+    
+</head>
+<body>
+
+
+
+<!-- start page loading -->
+<div id="preloader">
+    <div class="row loader">
+        <div class="loader-icon"></div>
+    </div>
+</div>
+<!-- end page loading -->
+
+<!-- start main-wrapper section -->
+<div class="main-wrapper">
+
+    <header>
+    <div class="navbar-default">
+
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <div class="menu_area">
+                        <nav class="navbar navbar-expand-lg navbar-light no-padding">
+
+                            <div class="navbar-header navbar-header-custom">
+                                <!-- start logo -->
+                                <a href="https://firmecadastru.ro/"
+                                   class="navbar-brand width-200px sm-width-180px xs-width-150px"><img
+                                            id="logo" src="https://firmecadastru.ro/assets/img/logos/logo.png" alt="logo"></a>
+                                <!-- end logo -->
+                            </div>
+
+                            <div class="navbar-toggler"></div>
+
+                            <!-- start menu area -->
+                            <ul class="navbar-nav" id="nav">
+                                <li>
+                                    <a href="javascript:void(0)">Firme</a>
+                                    <ul class="row megamenu d-none d-sm-none d-lg-block">
+
+                                        <li class="col-lg-2 col-sm-12 has-sub">
+                                            <ul class="sub-menu">
+                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/alba">
+                                                        Alba                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/arad">
+                                                        Arad                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/arges">
+                                                        Arges                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/bacau">
+                                                        Bacau                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/bihor">
+                                                        Bihor                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/bistrita-nasaud">
+                                                        Bistrita-Nasaud                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/botosani">
+                                                        Botosani                                                    </a>
+                                                </li>
+                                                                                            </ul>
+                                        </li>
+                                        <li class="col-lg-2 col-sm-12 has-sub">
+                                            <ul class="sub-menu">
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/braila">
+                                                        Braila                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/brasov">
+                                                        Brasov                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/bucuresti">
+                                                        Bucuresti                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/buzau">
+                                                        Buzau                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/calarasi">
+                                                        Calarasi                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/caras-severin">
+                                                        Caras-Severin                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/cluj">
+                                                        Cluj                                                    </a>
+                                                </li>
+                                                                                            </ul>
+                                        </li>
+                                        <li class="col-lg-2 col-sm-12 has-sub">
+                                            <ul class="sub-menu">
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/constanta">
+                                                        Constanta                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/covasna">
+                                                        Covasna                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/dambovita">
+                                                        Dambovita                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/dolj">
+                                                        Dolj                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/galati">
+                                                        Galati                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/giurgiu">
+                                                        Giurgiu                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/gorj">
+                                                        Gorj                                                    </a>
+                                                </li>
+                                                                                            </ul>
+                                        </li>
+                                        <li class="col-lg-2 col-sm-12 has-sub">
+                                            <ul class="sub-menu">
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/harghita">
+                                                        Harghita                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/hunedoara">
+                                                        Hunedoara                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/ialomita">
+                                                        Ialomita                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/iasi">
+                                                        Iasi                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/ilfov">
+                                                        Ilfov                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/maramures">
+                                                        Maramures                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/mehedinti">
+                                                        Mehedinti                                                    </a>
+                                                </li>
+                                                                                            </ul>
+                                        </li>
+                                        <li class="col-lg-2 col-sm-12 has-sub">
+                                            <ul class="sub-menu">
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/mures">
+                                                        Mures                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/neamt">
+                                                        Neamt                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/olt">
+                                                        Olt                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/prahova">
+                                                        Prahova                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/salaj">
+                                                        Salaj                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/satu-mare">
+                                                        Satu Mare                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/sibiu">
+                                                        Sibiu                                                    </a>
+                                                </li>
+                                                                                            </ul>
+                                        </li>
+                                        <li class="col-lg-2 col-sm-12 has-sub">
+                                            <ul class="sub-menu">
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/suceava">
+                                                        Suceava                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/teleorman">
+                                                        Teleorman                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/timis">
+                                                        Timis                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/tulcea">
+                                                        Tulcea                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/valcea">
+                                                        Valcea                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/vaslui">
+                                                        Vaslui                                                    </a>
+                                                </li>
+                                                                                                                                                <li>
+                                                    <a href="https://firmecadastru.ro/vrancea">
+                                                        Vrancea                                                    </a>
+                                                </li>
+                                                                                            </ul>
+                                        </li>
+                                        <li class="col-lg-2 col-sm-12 has-sub">
+                                            <ul class="sub-menu">
+                                                                                                                                            </ul>
+                                        </li>
+                                    </ul>
+
+                                    <ul class="d-lg-none">
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/alba">
+                                                    Alba                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/arad">
+                                                    Arad                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/arges">
+                                                    Arges                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/bacau">
+                                                    Bacau                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/bihor">
+                                                    Bihor                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/bistrita-nasaud">
+                                                    Bistrita-Nasaud                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/botosani">
+                                                    Botosani                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/braila">
+                                                    Braila                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/brasov">
+                                                    Brasov                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/bucuresti">
+                                                    Bucuresti                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/buzau">
+                                                    Buzau                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/calarasi">
+                                                    Calarasi                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/caras-severin">
+                                                    Caras-Severin                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/cluj">
+                                                    Cluj                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/constanta">
+                                                    Constanta                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/covasna">
+                                                    Covasna                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/dambovita">
+                                                    Dambovita                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/dolj">
+                                                    Dolj                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/galati">
+                                                    Galati                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/giurgiu">
+                                                    Giurgiu                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/gorj">
+                                                    Gorj                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/harghita">
+                                                    Harghita                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/hunedoara">
+                                                    Hunedoara                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/ialomita">
+                                                    Ialomita                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/iasi">
+                                                    Iasi                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/ilfov">
+                                                    Ilfov                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/maramures">
+                                                    Maramures                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/mehedinti">
+                                                    Mehedinti                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/mures">
+                                                    Mures                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/neamt">
+                                                    Neamt                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/olt">
+                                                    Olt                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/prahova">
+                                                    Prahova                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/salaj">
+                                                    Salaj                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/satu-mare">
+                                                    Satu Mare                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/sibiu">
+                                                    Sibiu                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/suceava">
+                                                    Suceava                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/teleorman">
+                                                    Teleorman                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/timis">
+                                                    Timis                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/tulcea">
+                                                    Tulcea                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/valcea">
+                                                    Valcea                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/vaslui">
+                                                    Vaslui                                                </a>
+                                            </li>
+                                                                                    <li>
+                                                <a href="https://firmecadastru.ro/vrancea">
+                                                    Vrancea                                                </a>
+                                            </li>
+                                                                            </ul>
+
+                                </li>
+                                <li><a href="https://firmecadastru.ro/localizare-teren">Localizare</a></li>
+                                <li>
+                                    <a href="javascript:void(0)">Info</a>
+                                    <ul>
+                                        <li><a href="https://firmecadastru.ro/ce-este-cadastrul">Ce este cadastrul</a></li>
+                                        <li><a href="https://firmecadastru.ro/oficii-birouri-cadastru">Oficii si birouri de cadastru</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">Despre</a>
+                                    <ul>
+                                        <li><a href="https://firmecadastru.ro/despre-noi">Echipa</a></li>
+                                        <li><a href="https://firmecadastru.ro/cum-functioneaza">Cum functioneaza</a></li>
+                                        <li><a href="https://firmecadastru.ro/parerile-clientilor">Parerile clientilor</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">Utile CF/CAD</a>
+                                    <ul>
+                                        <li><a href="https://firmecadastru.ro/acte-necesare">Acte necesare intabulare</a></li>
+                                        <li><a href="https://firmecadastru.ro/tipuri-lucrari">Tipuri de lucrari</a></li>
+                                    </ul>
+                                </li>
+
+                                <li><a href="https://firmecadastru.ro/contact">Contact</a></li>
+                            </ul>
+                            <!-- end menu area -->
+
+                            <!-- start attribute navigation -->
+                            <div class="attr-nav sm-no-margin sm-margin-65px-right xs-margin-55px-right ml-auto">
+                                <ul>
+                                    <li class="xs-padding-10px-top sm-padding-5px-top">
+                                        <a href="https://firmecadastru.ro/cauta-firma" title="Cauta firma">
+                                            <i class="fas fa-search text-theme-color font-size18 margin-15px-top sm-no-margin-top"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="top-nav-area">
+                                    <li class="dropdown sm-no-margin-right">
+                                                                                    <a href="https://firmecadastru.ro/login" id="loginBtn"
+                                               class="butn listi md-padding-15px-lr sm-no-padding">
+                                                <i class="fas fa-sign-in-alt font-size22 margin-5px-right sm-no-margin-right vertical-align-middle"></i>
+                                                <span class="vertical-align-middle sm-display-none">Log In</span>
+                                            </a>
+                                                                            </li>
+                                </ul>
+                            </div>
+                            <!-- end attribute navigation -->
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <style>
+.input-value-coord{
+    padding: 5px;
+    text-align: right;
+    font-size: 16px;
+    transition: var(--transition);
+}
+.input-value-pct{
+    font-size: 16px;
+    text-align: center;
+    padding: 5px;
+}
+
+td {
+    padding: 2px ;
+}
+
+#map_container {
+    width: 100%;
+    height: 600px;
+    margin-top: 10px;
+}
+
+#bodyContent p {
+    margin-bottom: 10px;
+}
+
+</style>
+
+<section class="page-title-section bg-img cover-background" data-overlay-dark="2"
+         data-background="https://firmecadastru.ro/assets/img/banner/harta.jpg">
+    <div class="container">
+        <h1 class="titlu">
+            Localizare teren
+        </h1>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row margin-50px-bottom">
+            <div class="col-lg-7 col-md-6">
+                <p>
+                    Aceasta este o mica aplicatie cu ajutorul careia se poate determina pozitia unui imobil
+                    (cu precizie metrica), prin introducerea a maxim 4 puncte de coordonate.
+                    Tot ce trebuie sa faceti este sa completati in formularul din dreapta
+                    valorile pentru coordonatele <i>X(Nord)</i> si <i>Y(Est)</i> aferente fiecarui punct,
+                    iar dupa ce ati verificat datele apasati butonul
+                    <i class="text-theme-color font-size14 text-uppercase">Localizare</i>.
+                </p>
+                <p>
+                    Trebuie mentionat ca aceste coordonate sunt exprimate in metri si au ca sistem de referinta Sistemul de Proiectie Stereografic 1970 (Stereo70).
+                </p>
+                <p>
+                    Exemplu de coordonate pentru un punct: X(Nord) = <i>329976.803</i> ; Y(Est) = <i>589696.632</i>
+                </p>
+                <p>
+                    <b>Observatie</b>: pentru a pozitiona cu precizie aceste puncte de coordonate,
+                    aveti nevoie de serviciile unui inginer geodez/topograf autorizat.
+                </p>
+            </div>
+            <div class="col-lg-5 col-md-6">
+                <form id="localForm" method="get" action="/localizare/index">
+
+                    <div class="wrapper">
+
+                        <table>
+                            <tr align="center">
+                                <th  style="width: 15%">Punct</th>
+                                <th style="width: 40%">
+                                    X (Nord)
+                                </th>
+                                <th  style="width: 40%">
+                                    Y (Est)
+                                </th>
+                                <th style="width:  5%"></th>
+                            </tr>
+
+                                                                                            <tr>
+                                    <td valign="middle" align="center">
+                                        <input type="text" value="1"
+                                               class="input-value-pct" disabled />
+                                    </td>
+                                    <td>
+                                        <input id="local_x1" name="local_x[0]" type="text"
+                                               value=""
+                                               placeholder="X (Nord) pct. 1"
+                                               class="input-value-coord" />
+                                    </td>
+                                    <td>
+                                        <input id="local_y1" name="local_y[0]" type="text"
+                                               value=""
+                                               placeholder="Y (Est) pct. 1"
+                                               class="input-value-coord" />
+                                    </td>
+                                    <td>
+                                                                            </td>
+                                </tr>
+                                                                                            <tr>
+                                    <td valign="middle" align="center">
+                                        <input type="text" value="2"
+                                               class="input-value-pct" disabled />
+                                    </td>
+                                    <td>
+                                        <input id="local_x2" name="local_x[1]" type="text"
+                                               value=""
+                                               placeholder="X (Nord) pct. 2"
+                                               class="input-value-coord" />
+                                    </td>
+                                    <td>
+                                        <input id="local_y2" name="local_y[1]" type="text"
+                                               value=""
+                                               placeholder="Y (Est) pct. 2"
+                                               class="input-value-coord" />
+                                    </td>
+                                    <td>
+                                                                            </td>
+                                </tr>
+                                                                                            <tr>
+                                    <td valign="middle" align="center">
+                                        <input type="text" value="3"
+                                               class="input-value-pct" disabled />
+                                    </td>
+                                    <td>
+                                        <input id="local_x3" name="local_x[2]" type="text"
+                                               value=""
+                                               placeholder="X (Nord) pct. 3"
+                                               class="input-value-coord" />
+                                    </td>
+                                    <td>
+                                        <input id="local_y3" name="local_y[2]" type="text"
+                                               value=""
+                                               placeholder="Y (Est) pct. 3"
+                                               class="input-value-coord" />
+                                    </td>
+                                    <td>
+                                                                            </td>
+                                </tr>
+                                                                                            <tr>
+                                    <td valign="middle" align="center">
+                                        <input type="text" value="4"
+                                               class="input-value-pct" disabled />
+                                    </td>
+                                    <td>
+                                        <input id="local_x4" name="local_x[3]" type="text"
+                                               value=""
+                                               placeholder="X (Nord) pct. 4"
+                                               class="input-value-coord" />
+                                    </td>
+                                    <td>
+                                        <input id="local_y4" name="local_y[3]" type="text"
+                                               value=""
+                                               placeholder="Y (Est) pct. 4"
+                                               class="input-value-coord" />
+                                    </td>
+                                    <td>
+                                                                            </td>
+                                </tr>
+                            
+                            <tr>
+                                <td colspan="3">
+                                    <input class="butn btn-block text-center" style="display: block"
+                                           id="local_submit" name="local_submit"
+                                           type="submit" value="Localizare" />
+                                </td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
+        <div class="sm-margin-35px-bottom sm-margin-10px-top">
+            <h5 class="font-size20 border-bottom padding-5px-bottom">Locatie</h5>
+
+            <!-- Do not remove this field. -->
+            <div id="messagesContainer"></div>
+
+            <div id="map_container">
+                <div id="map_canvas" style="width:100%; height:100%"></div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- Google Maps V3 
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlV7jU4QZqtC9EHr9hN_CPPBBRwvDzYrU"></script>
+
+-->
+
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_Xo2btG0irFujnPUCcvXuSvDvuc7v1h0"></script>
+
+<script type="text/javascript">
+
+// Set coordinates
+let coordinates = [];
+
+$(document).ready(function() {
+
+    let coords = [];
+
+    // Google Maps stuff
+    let centerLatLng = new google.maps.LatLng(46, 25);
+    let myOptions = {
+        center: centerLatLng,
+        zoom: 7,
+        scaleControl: true,
+        mapTypeId: google.maps.MapTypeId.HYBRID
+    };
+
+    // Set Google Maps
+    let Gmap = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+    // Create new bounds object
+    let bounds = new google.maps.LatLngBounds();
+
+    // Parse coordinates and set markers
+    if (coordinates.length) {
+        coordinates.forEach(function(point){
+
+            // Set Google Maps point of coordinates
+            let geoCode = new google.maps.LatLng(point.latitude, point.longitude);
+
+            // Add current coordinates to array
+            coords.push(geoCode);
+
+            // Extend bounds
+            bounds.extend(geoCode);
+
+            // Create Google Maps Marker
+            let Gmarker = new google.maps.Marker({
+                map: Gmap,
+                position: geoCode,
+                icon: '/assets/img/map/marker_small.png',
+                draggable: false,
+                title: 'Punctul ' + point.name
+            });
+
+            let mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${point.latitude},${point.longitude}`;
+
+            let contentString = `
+<div id="bodyContent">
+    <p>Punctul: ${point.name}</p>
+    <p>Stereo 70: ${point.north}, ${point.east}</p>
+    <p>
+        ETRS 89:
+        <a href="${mapsUrl}" target="_blank">
+            <i class="fa fa-location-arrow"></i> ${point.latitude}, ${point.longitude} (navigare catre punct)
+        </a>
+    </p>
+</div>
+`;
+
+            let Ginfowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            google.maps.event.addListener(Gmarker, 'click', function() {
+                Ginfowindow.open(Gmap,Gmarker);
+            });
+        });
+    }
+
+    // Add new bounds object to map
+    if (coordinates.length) {
+        Gmap.fitBounds(bounds);
+    }
+
+    // Draw line between 2 points
+    if (coords.length === 2) {
+        let line = new google.maps.Polyline({
+            path: coords,
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        });
+
+        line.setMap(Gmap);
+    }
+
+    // Draw polygon
+    if (coords.length > 2) {
+        const polygon = new google.maps.Polygon({
+            paths: coords,
+            strokeColor: "#FF0000",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#FF0000",
+            fillOpacity: 0.05,
+        });
+        polygon.setMap(Gmap);
+    }
+
+    // --------------------------
+
+    // Submit form.
+    $('#localForm').submit(function(event){
+        event.preventDefault();
+
+        let coordinatesAsString = '';
+
+        for (let i = 1; i <= 4; i++) {
+            let x = $('#local_x'+i).val();
+            let y = $('#local_y'+i).val();
+            if (x > 0 && y > 0) {
+                coordinatesAsString += ';' + x + ',' + y;
+            }
+        }
+
+        coordinatesAsString = coordinatesAsString.replace(';', '');
+
+        let url = "https:\/\/firmecadastru.ro\/localizare-teren\/";
+        window.location.href = url + coordinatesAsString;
+    });
+
+    // Show errors
+    let messengerData = {"error":[],"warning":[],"info":[],"success":[]};
+    $.each(messengerData, function(index, element) {
+        $.each(element, function(k, v) {
+            showAlert({type: index, data: v});
+        });
+    });
+
+});
+</script>
+    <footer>
+    <div class="footer-area padding-90px-tb md-padding-70px-tb sm-padding-50px-tb">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4  sm-margin-30px-bottom">
+                    <ul class="col-center">
+                        <li>
+                            <a href="https://firmecadastru.ro/" data-testid='link-listaJudete'>
+                                <i class="fa fa-map-marked-alt text-theme-color"></i> Lista judete
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://firmecadastru.ro/ce-este-cadastrul">
+                                <i class="fa fa-book text-theme-color"></i> Ce este cadastrul
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://firmecadastru.ro/oficii-birouri-cadastru">
+                                <i class="fa fa-building text-theme-color"></i>
+                                Oficii si birouri de cadastru
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://firmecadastru.ro/localizare">
+                                <i class="fa fa-map-marker text-theme-color"></i>&nbsp;Localizare teren
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://firmecadastru.ro/parerile-clientilor">
+                                <i class="fa fa-comment text-theme-color"></i> Parerile clientilor
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 sm-margin-30px-bottom">
+                    <ul class="col-list">
+                        <li>
+                            <a href="https://firmecadastru.ro/inscriere">
+                                <i class="fa fa-user-plus text-theme-color"></i> Inscriere firma / PFA
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://firmecadastru.ro/cauta-firma">
+                                <i class="fa fa-search text-theme-color"></i> Cauta firma / PFA
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://firmecadastru.ro/termeni-si-conditii">
+                                <i class="fa fa-info-circle text-theme-color"></i> Termeni si conditii
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://firmecadastru.ro/politica-confidentialitate">
+                                <i class="fa fa-info-circle text-theme-color"></i> Politica de confidentialitate
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://firmecadastru.ro/politica-cookies">
+                                <i class="fa fa-info-circle text-theme-color"></i> Politica Cookies
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 sm-margin-30px-bottom">
+                    <ul class="col-list">
+                        <li>
+                            <a href="https://www.ancpi.ro/" target="_blank">
+                                <i class="fa fa-globe text-theme-color"></i> ANCPI
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://geoportal.ancpi.ro/imobile.html" target="_blank">
+                                <i class="fa fa-globe text-theme-color"></i> Geoportal ANCPI (Harta)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://epay.ancpi.ro/epay/SelectProd.action?prodId=1420" target="_blank">
+                                <i class="fa fa-globe text-theme-color"></i> Extras carte funciara online
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://pivotpos.ro/" target="_blank">
+                                <i class="fa fa-globe text-theme-color"></i> Statii Permanente GPS
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer-bar xs-padding-15px-tb">
+        <div class="container">
+            <div class="float-right xs-width-100 text-center xs-margin-5px-bottom"></div>
+            <div class="float-left xs-width-100 text-center">
+                <p class="text-medium-gray font-weight-600 margin-5px-top xs-no-margin-top">Copyright © 2026                    <a href="/">  FirmeCadastru.ro</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</div>
+<!-- end main-wrapper section -->
+
+<!-- start scroll to top -->
+<a href="javascript:void(0)" class="scroll-to-top"><i class="fas fa-angle-up" aria-hidden="true"></i></a>
+<!-- end scroll to top -->
+
+
+<!-- modernizr js -->
+<script src="https://firmecadastru.ro/assets/js/modernizr.js"></script>
+
+<!-- bootstrap -->
+<script src="https://firmecadastru.ro/assets/js/bootstrap.min.js"></script>
+
+<!-- navigation -->
+<script src="https://firmecadastru.ro/assets/js/nav-menu.js"></script>
+
+<!-- tab -->
+<script src="https://firmecadastru.ro/assets/js/easy.responsive.tabs.js"></script>
+
+<!-- owl carousel -->
+<script src="https://firmecadastru.ro/assets/js/owl.carousel.js"></script>
+
+<!-- stellar js -->
+<script src="https://firmecadastru.ro/assets/js/jquery.stellar.min.js"></script>
+
+<!-- animated js -->
+<script src="https://firmecadastru.ro/assets/js/animated-headline.js"></script>
+
+<!-- range slider -->
+<script src="https://firmecadastru.ro/assets/js/ion.rangeSlider.min.js"></script>
+
+<!-- datepicker -->
+<script src="https://firmecadastru.ro/assets/js/datepicker.min.js"></script>
+
+<!-- jquery validation -->
+<script src="https://firmecadastru.ro/assets/js/jquery.validate.min.js"></script>
+
+<!-- jquery wizard -->
+<script src="https://firmecadastru.ro/assets/js/jquery.bootstrap.wizard.min.js"></script>
+
+<!-- form-wizard -->
+<script src="https://firmecadastru.ro/assets/js/form-wizard.js"></script>
+
+<!--  clipboard js -->
+<script src="https://firmecadastru.ro/assets/js/clipboard.min.js"></script>
+
+<!--  prism js -->
+<script src="https://firmecadastru.ro/assets/js/prism.js"></script>
+
+<!-- custom scripts -->
+<script src="https://firmecadastru.ro/assets/js/main.js"></script>
+
+</body>
+</html>
+

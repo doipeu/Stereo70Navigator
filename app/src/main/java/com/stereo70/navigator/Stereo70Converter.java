@@ -38,22 +38,73 @@ public class Stereo70Converter {
         }
     }
 
+    private static boolean isInitialized = false;
+    private static org.locationtech.proj4j.CoordinateReferenceSystem sourceCRS;
+    private static org.locationtech.proj4j.CoordinateReferenceSystem targetCRS;
+    private static org.locationtech.proj4j.CoordinateTransform transform;
+
+    /**
+     * Initialize grid and proj4j
+     */
+    public static void init(android.content.Context context) {
+        if (isInitialized) return;
+        try {
+            java.io.File gridFile = new java.io.File(context.getFilesDir(), "stereo70_etrs89A.gsb");
+            if (!gridFile.exists()) {
+                java.io.InputStream is = context.getAssets().open("stereo70_etrs89A.gsb");
+                java.io.FileOutputStream os = new java.io.FileOutputStream(gridFile);
+                byte[] buffer = new byte[1024];
+                int read;
+                while ((read = is.read(buffer)) != -1) {
+                    os.write(buffer, 0, read);
+                }
+                is.close();
+                os.flush();
+                os.close();
+            }
+
+            org.locationtech.proj4j.CRSFactory factory = new org.locationtech.proj4j.CRSFactory();
+            String customProj = "+proj=sterea +lat_0=46 +lon_0=25 +k=0.99975 +x_0=500000 +y_0=500000 +ellps=krass +nadgrids=" 
+                    + gridFile.getAbsolutePath() + " +units=m +no_defs";
+            sourceCRS = factory.createFromParameters("EPSG:3844_Grid", customProj);
+            targetCRS = factory.createFromName("EPSG:4326");
+            
+            org.locationtech.proj4j.CoordinateTransformFactory ctf = new org.locationtech.proj4j.CoordinateTransformFactory();
+            transform = ctf.createTransform(sourceCRS, targetCRS);
+            isInitialized = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Convert Stereo 70 coordinates to GPS (WGS84)
-     * @param x Stereo 70 X coordinate (Easting)
-     * @param y Stereo 70 Y coordinate (Northing)
+     * @param x Stereo 70 X coordinate (Northing usually, wait, Stereo 70 X is North, Y is East)
+     *        But standard coordinate systems take Easting for X, Northing for Y.
+     *        Our method is called as stereo70ToGPS(easting, northing) from MainActivity
+     * @param y Stereo 70 Y coordinate
      * @return GPSCoordinate with latitude and longitude
      */
     public static GPSCoordinate stereo70ToGPS(double x, double y) {
-        // Step 1: Remove false easting/northing
+        if (isInitialized && transform != null) {
+            try {
+                org.locationtech.proj4j.ProjCoordinate src = new org.locationtech.proj4j.ProjCoordinate(x, y);
+                org.locationtech.proj4j.ProjCoordinate tgt = new org.locationtech.proj4j.ProjCoordinate();
+                transform.transform(src, tgt);
+                // Proj4J EPSG:4326 output is usually X=longitude, Y=latitude
+                return new GPSCoordinate(tgt.y, tgt.x);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        // Fallback: 7-parameter Coordinate Frame Rotation (Bursa-Wolf) without Grid
         double xRel = x - STEREO70_X0;
         double yRel = y - STEREO70_Y0;
 
-        // Step 2: Convert from Stereo70 to Krasovsky lat/lon
         double lat0Rad = Math.toRadians(STEREO70_LAT0);
         double lon0Rad = Math.toRadians(STEREO70_LON0);
 
-        // Calculate rho and c
         double rho = Math.sqrt(xRel * xRel + yRel * yRel);
         double c = 2.0 * Math.atan2(rho, 2.0 * KRASOVSKY_A * STEREO70_K0);
 
@@ -62,28 +113,9 @@ public class Stereo70Converter {
         double sinLat0 = Math.sin(lat0Rad);
         double cosLat0 = Math.cos(lat0Rad);
 
-        // Calculate latitude (Krasovsky)
-        double latKras;
-        if (rho == 0) {
-            latKras = lat0Rad;
-        } else {
-            double numerator = cosC * sinLat0 + (yRel * sinC * cosLat0 / rho);
-            latKras = Math.asin(numerator);
-        }
+        double latKras = (rho == 0) ? lat0Rad : Math.asin(cosC * sinLat0 + (yRel * sinC * cosLat0 / rho));
+        double lonKras = (rho == 0) ? lon0Rad : lon0Rad + Math.atan2(xRel * sinC, rho * cosLat0 * cosC - yRel * sinLat0 * sinC);
 
-        // Calculate longitude (Krasovsky)
-        double lonKras;
-        if (rho == 0) {
-            lonKras = lon0Rad;
-        } else {
-            double numerator = xRel * sinC;
-            double denominator = rho * cosLat0 * cosC - yRel * sinLat0 * sinC;
-            lonKras = lon0Rad + Math.atan2(numerator, denominator);
-        }
-
-        // Step 3: Convert from Krasovsky to WGS84 (datum transformation)
-        // Using 7-parameter Helmert Coordinate Frame Rotation (EPSG:3844 to EPSG:4326/Bursa-Wolf)
-        // Values from official ANCPI definitions minus the grid distortion
         double dx = 2.3287;
         double dy = -147.0425;
         double dz = -92.0802;
@@ -94,39 +126,30 @@ public class Stereo70Converter {
         double rz = -0.49729934 * secToRad;
         double s = 5.68906266 / 1000000.0;
 
-        // Convert to Cartesian coordinates (Krasovsky)
         double N = KRASOVSKY_A / Math.sqrt(1 - KRASOVSKY_E2 * Math.sin(latKras) * Math.sin(latKras));
         double xCart = N * Math.cos(latKras) * Math.cos(lonKras);
         double yCart = N * Math.cos(latKras) * Math.sin(lonKras);
         double zCart = N * (1 - KRASOVSKY_E2) * Math.sin(latKras);
 
-        // Apply 7-parameter Coordinate Frame Rotation (Bursa-Wolf)
         double xWgs = xCart + dx - rz * yCart + ry * zCart + s * xCart;
         double yWgs = yCart + dy + rz * xCart - rx * zCart + s * yCart;
         double zWgs = zCart + dz - ry * xCart + rx * yCart + s * zCart;
 
-        // Convert back to geodetic coordinates (WGS84)
         double lon = Math.atan2(yWgs, xWgs);
         double p = Math.sqrt(xWgs * xWgs + yWgs * yWgs);
         double lat = Math.atan2(zWgs, p * (1 - WGS84_E2));
 
-        // Iterative refinement for latitude
         for (int i = 0; i < 5; i++) {
             double sinLat = Math.sin(lat);
             double N_WGS = WGS84_A / Math.sqrt(1 - WGS84_E2 * sinLat * sinLat);
             lat = Math.atan2(zWgs + WGS84_E2 * N_WGS * sinLat, p);
         }
 
-        // Convert to degrees
-        double latDeg = Math.toDegrees(lat);
-        double lonDeg = Math.toDegrees(lon);
-
-        return new GPSCoordinate(latDeg, lonDeg);
+        return new GPSCoordinate(Math.toDegrees(lat), Math.toDegrees(lon));
     }
 
     /**
      * Validate Stereo 70 coordinates
-     * Typical Romanian ranges: X: 200000-800000, Y: 200000-900000
      */
     public static boolean isValidStereo70(double x, double y) {
         return x >= 100000 && x <= 900000 && y >= 100000 && y <= 1000000;

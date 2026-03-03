@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
         initViews();
         setupListeners();
+        
+        // Încarcă Grid-ul NTv2 PROJ (5MB) necesar pt. marja de eroare sub 1m
+        Stereo70Converter.init(getApplicationContext());
     }
 
     private void initViews() {
